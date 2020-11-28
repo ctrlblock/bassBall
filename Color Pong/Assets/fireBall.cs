@@ -5,6 +5,7 @@ using UnityEngine;
 public class fireBall : MonoBehaviour {
 	public GameObject ball;
 	public Color color = Color.red;
+	public string colorString;
 	// Use this for initialization
 	void Start () {
 		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
@@ -14,8 +15,8 @@ public class fireBall : MonoBehaviour {
 	public void fire() {
 		ball = Instantiate (ball);
 		ball.transform.position = transform.position;
-		movement ballScript = ball.GetComponent<movement> ();
-		ballScript.setColor (color);
+		ballBehavior ballScript = ball.GetComponent<ballBehavior> ();
+		ballScript.setColor (color, colorString);
 	}
 	
 	// Update is called once per frame

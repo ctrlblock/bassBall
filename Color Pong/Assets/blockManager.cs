@@ -32,7 +32,7 @@ public class blockManager : MonoBehaviour {
 
 	int GenerateNextNote() {
 		int note = ((int)(Random.value * 3)) % 3;
-		Debug.Log (note);
+		//Debug.Log (note);
 		return note;
 	}
 }
