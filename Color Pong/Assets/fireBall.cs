@@ -12,11 +12,11 @@ public class fireBall : MonoBehaviour {
 		sr.color = color;
 	}
 
-	public void fire() {
+	public void fire(string songNotes) {
 		ball = Instantiate (ball);
 		ball.transform.position = transform.position;
 		ballBehavior ballScript = ball.GetComponent<ballBehavior> ();
-		ballScript.setColor (color, colorString);
+		ballScript.setColor (color, songNotes);
 	}
 	
 	// Update is called once per frame

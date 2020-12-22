@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 public class blockManager : MonoBehaviour {
 	//the OrderedDictionary enumerator is not treating me kindly, so for now I am just implementing 2 lists
 	private List<int> songTimes = new List<int>();
-	private List<int> songNotes = new List<int>();
+	private List<string> songNotes = new List<string>();
 	int timer = 0;
 	private int songProgress = 0;
 	public int numberBlocks = 3;
@@ -49,22 +49,33 @@ public class blockManager : MonoBehaviour {
 	void songUpdate(int time) {
 		Debug.Log (time);
 		if(songTimes[songProgress] == time) {
-				blocks [songNotes [songProgress]].fire ();
+			for (int i = 0; i < songNotes [songProgress].Length; i++) {
+				int songNote = int.Parse (songNotes [songProgress] [i].ToString());
+				blocks [songNote].fire (songNotes[songProgress]);
+			}
 				triggered = true;
 				songProgress++;
 		}
 	}
 
 	void randomUpdate(int time) {
-		blocks [GenerateNextNote()].fire ();
+		string note = GenerateNextNote ();
+		for (int i = 0; i < note.Length; i++) {
+			blocks [int.Parse(note[i].ToString())].fire (note);
+		}
 			triggered = true;
 			songProgress++;
 	}
 
-	int GenerateNextNote() {
+	string GenerateNextNote() {
 		int note = ((int)(Random.value * 3)) % 3;
-		//Debug.Log (note);
-		return note;
+		string noteString = note.ToString ();
+		if (note < 2) {
+			int secondNote = ((int)(Random.value * 2)) % 2;
+			if (secondNote == 1)
+				noteString += (note + 1).ToString ();
+		}
+		return noteString;
 	}
 
 	void readSong() {
@@ -77,7 +88,7 @@ public class blockManager : MonoBehaviour {
 			reader.Close();
 			for (int i = 0; i < arr.Length; i += 2) {
 				songTimes.Add (int.Parse(arr [i])); 
-				songNotes.Add(int.Parse(arr [i + 1]));
+				songNotes.Add(arr [i + 1]);
 			}
 		}
 	}
