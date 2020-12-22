@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour {
 
-	private static int score = 0;
+	public static int score = 0;
+	public static int total = 0;
 
 
 	public static void changeScore() {
 		score++;
+	}
+
+
+	public static void changeTotal() {
+		total++;
 	}
 
 	// Use this for initialization
@@ -18,6 +24,5 @@ public class ScoreController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Text>().text = score.ToString();
 	}
 }
