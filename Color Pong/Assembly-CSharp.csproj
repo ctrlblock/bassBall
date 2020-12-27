@@ -57,7 +57,10 @@
      <Compile Include="Assets\ButtonInitiation.cs" />
      <Compile Include="Assets\ButtonSetting.cs" />
      <Compile Include="Assets\ControlSettings.cs" />
+     <Compile Include="Assets\EndScreenCommands.cs" />
      <Compile Include="Assets\fireBall.cs" />
+     <Compile Include="Assets\LeaderBoardBehavior.cs" />
+     <Compile Include="Assets\LeaderBoardText.cs" />
      <Compile Include="Assets\movement.cs" />
      <Compile Include="Assets\noteBehavior.cs" />
      <Compile Include="Assets\playerMove.cs" />
@@ -66,6 +69,7 @@
      <Compile Include="Assets\SongSelector.cs" />
      <Compile Include="Assets\TotalText.cs" />
      <None Include="Assets\Songs\song2.txt" />
+     <None Include="Assets\Records\topscores.txt" />
      <None Include="Assets\Songs\song1.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

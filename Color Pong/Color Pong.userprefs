@@ -1,14 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\noteBehavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\blockManager.cs">
     <Files>
-      <File FileName="Assets\playerMove.cs" Line="1" Column="1" />
-      <File FileName="Assets\fireBall.cs" Line="19" Column="33" />
-      <File FileName="Assets\blockManager.cs" Line="37" Column="8" />
-      <File FileName="Assets\ScoreController.cs" Line="23" Column="3" />
+      <File FileName="Assets\ScoreController.cs" Line="1" Column="1" />
+      <File FileName="Assets\SongSelector.cs" Line="11" Column="3" />
+      <File FileName="Assets\ButtonBehavior.cs" Line="10" Column="64" />
       <File FileName="Assets\ControlSettings.cs" Line="1" Column="1" />
-      <File FileName="Assets\ballBehavior.cs" Line="18" Column="2" />
-      <File FileName="Assets\noteBehavior.cs" Line="19" Column="18" />
+      <File FileName="Assets\ButtonSetting.cs" Line="14" Column="3" />
+      <File FileName="Assets\LeaderBoardBehavior.cs" Line="45" Column="30" />
+      <File FileName="Assets\LeaderBoardText.cs" Line="21" Column="35" />
+      <File FileName="Assets\TotalText.cs" Line="16" Column="3" />
+      <File FileName="Assets\Records\topscores.txt" Line="1" Column="1" />
+      <File FileName="Assets\blockManager.cs" Line="34" Column="3" />
+      <File FileName="Assets\ScoreText.cs" Line="1" Column="1" />
+      <File FileName="Assets\Songs\song2.txt" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

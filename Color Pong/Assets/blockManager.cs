@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Collections.Specialized;
+using UnityEngine.SceneManagement;
 
 public class blockManager : MonoBehaviour {
 	//the OrderedDictionary enumerator is not treating me kindly, so for now I am just implementing 2 lists
 	private List<int> songTimes = new List<int>();
 	private List<string> songNotes = new List<string>();
 	int timer = 0;
+	int totalNotes = 200;
 	private int songProgress = 0;
 	public int numberBlocks = 3;
 	bool random = false;
@@ -16,6 +18,7 @@ public class blockManager : MonoBehaviour {
 	public GameObject noteObject;
 	public bool triggered = false;
 	public ScoreController sc;
+	float startTime = 0;
 	// Use this for initialization
 	void Start () {
 		readSong ();
@@ -26,11 +29,16 @@ public class blockManager : MonoBehaviour {
 				print ("This child is a block");
 			}
 		}
+		startTime = Time.time;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if ((int)(Time.time*2)-3 > timer) {
+		if (ScoreController.total >= totalNotes) {
+			endGame ();
+		}
+		if ((int)((Time.time-startTime)*2)-3 > timer) {
 			timer++;
 			if (!triggered) {
 				//initiate note here
@@ -46,15 +54,21 @@ public class blockManager : MonoBehaviour {
 		}
 	}
 
+	void endGame() {
+		LeaderBoardBehavior.updateSongRecord (SongSelector.songName, ScoreController.score);
+		SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex+1);
+	}
+
 	void songUpdate(int time) {
-		Debug.Log (time);
-		if(songTimes[songProgress] == time) {
-			for (int i = 0; i < songNotes [songProgress].Length; i++) {
-				int songNote = int.Parse (songNotes [songProgress] [i].ToString());
-				blocks [songNote].fire (songNotes[songProgress]);
-			}
+		if (songTimes.Count > songProgress) {
+			if (songTimes [songProgress] == time) {
+				for (int i = 0; i < songNotes [songProgress].Length; i++) {
+					int songNote = int.Parse (songNotes [songProgress] [i].ToString ());
+					blocks [songNote].fire (songNotes [songProgress]);
+				}
 				triggered = true;
 				songProgress++;
+			}
 		}
 	}
 
@@ -82,14 +96,18 @@ public class blockManager : MonoBehaviour {
 		if (SongSelector.songPath.Equals( "random")) {
 			random = true;
 		} else {
+			totalNotes = 0;
 			Debug.Log ("Song Selected");
 			StreamReader reader = new StreamReader (SongSelector.songPath); 
 			string[] arr = reader.ReadToEnd().Split (',');
 			reader.Close();
-			for (int i = 0; i < arr.Length; i += 2) {
+			for (int i = 0; i < arr.Length; i += 2 ) {
 				songTimes.Add (int.Parse(arr [i])); 
-				songNotes.Add(arr [i + 1]);
+				songNotes.Add(arr [i+1]);
+				totalNotes += arr [i+1].Length;
 			}
 		}
+		Debug.Log ("Total Notes: " + totalNotes);
 	}
+		
 }
