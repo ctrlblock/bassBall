@@ -40,7 +40,7 @@ public class LeaderBoardBehavior : MonoBehaviour {
 				songFound = true;
 				bool added = false;
 				//calculate new records for this song
-				for(int i = 1; i < lineList.Count-1; i++) {
+				for(int i = 1; i < lineList.Count; i++) {
 					if(newScore > int.Parse(lineList[i])) {
 						lineList.Insert (i, newScore.ToString());
 						added = true;

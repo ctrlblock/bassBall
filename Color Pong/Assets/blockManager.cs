@@ -39,7 +39,7 @@ public class blockManager : MonoBehaviour {
 		if (ScoreController.total >= totalNotes) {
 			endGame ();
 		}
-		if ((int)((Time.time-startTime)*3)-3 > timer) {
+		if ((int)((Time.time-startTime)*2.5)-3 > timer) {
 			timer++;
 			if (!triggered) {
 				if (random) {
@@ -93,7 +93,7 @@ public class blockManager : MonoBehaviour {
 	}
 
 	void readSong() {
-		if (SongSelector.songPath.Equals( "random")) {
+		if (SongSelector.songPath.Equals( "Random")) {
 			Debug.Log ("Random Selected");
 			random = true;
 			totalNotes = 80;
@@ -116,6 +116,9 @@ public class blockManager : MonoBehaviour {
 		//The static variables persist through scenes, whereas the GameObjects are destroyed when scenes switch
 		ScoreController.score = 0;
 		ScoreController.total = 0;
+		songProgress = 0;
+		triggered = false;
+		timer = 0;
 	}
 
 	public void startGame() {
