@@ -38,14 +38,19 @@ public class LeaderBoardBehavior : MonoBehaviour {
 			List<string> lineList = new List<string>(splitLine); 
 			if (splitLine [0].Equals (recordName)) {
 				songFound = true;
+				bool added = false;
 				//calculate new records for this song
-				for(int i = 1; i < lineList.Count; i++) {
-					if(newScore <= int.Parse(lineList[i]) && (newScore > 2 || lineList.Count < 11)) {
+				for(int i = 1; i < lineList.Count-1; i++) {
+					if(newScore > int.Parse(lineList[i])) {
 						lineList.Insert (i, newScore.ToString());
+						added = true;
 						if(lineList.Count > 11)
 							lineList.RemoveAt (11);
 						break;
 					}
+				}
+				if (lineList.Count < 11 && !added) {
+					lineList.Add (newScore.ToString());
 				}
 
 			}

@@ -68,9 +68,9 @@
      <Compile Include="Assets\ScoreText.cs" />
      <Compile Include="Assets\SongSelector.cs" />
      <Compile Include="Assets\TotalText.cs" />
-     <None Include="Assets\Songs\song2.txt" />
      <None Include="Assets\Records\topscores.txt" />
-     <None Include="Assets\Songs\song1.txt" />
+     <None Include="Assets\Songs\Test.txt" />
+     <None Include="Assets\Songs\DoubleNotes.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

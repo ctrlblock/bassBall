@@ -10,7 +10,7 @@ public class blockManager : MonoBehaviour {
 	private List<int> songTimes = new List<int>();
 	private List<string> songNotes = new List<string>();
 	int timer = 0;
-	int totalNotes = 200;
+	int totalNotes = 0;
 	private int songProgress = 0;
 	public int numberBlocks = 3;
 	bool random = false;
@@ -19,17 +19,18 @@ public class blockManager : MonoBehaviour {
 	public bool triggered = false;
 	public ScoreController sc;
 	float startTime = 0;
+
+	public GameObject endScreen;
 	// Use this for initialization
 	void Start () {
 		readSong ();
-		Debug.Log ("done");
+		Debug.Log ("BlockManager started");
 		foreach (Transform child in transform) {
 			if (child.gameObject.tag == "Block") {
 				blocks.Add (child.gameObject.GetComponent<fireBall>());
-				print ("This child is a block");
 			}
 		}
-		startTime = Time.time;
+		startGame ();
 
 	}
 	
@@ -38,11 +39,9 @@ public class blockManager : MonoBehaviour {
 		if (ScoreController.total >= totalNotes) {
 			endGame ();
 		}
-		if ((int)((Time.time-startTime)*2)-3 > timer) {
+		if ((int)((Time.time-startTime)*3)-3 > timer) {
 			timer++;
 			if (!triggered) {
-				//initiate note here
-				//GameObject noteBlock = Instantiate(noteObject, blocks[0].transform.position);
 				if (random) {
 					randomUpdate (timer);
 				} else {
@@ -56,7 +55,8 @@ public class blockManager : MonoBehaviour {
 
 	void endGame() {
 		LeaderBoardBehavior.updateSongRecord (SongSelector.songName, ScoreController.score);
-		SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex+1);
+		endScreen.SetActive (true);
+		GameObject.Find ("Game").SetActive (false);
 	}
 
 	void songUpdate(int time) {
@@ -94,7 +94,9 @@ public class blockManager : MonoBehaviour {
 
 	void readSong() {
 		if (SongSelector.songPath.Equals( "random")) {
+			Debug.Log ("Random Selected");
 			random = true;
+			totalNotes = 80;
 		} else {
 			totalNotes = 0;
 			Debug.Log ("Song Selected");
@@ -109,5 +111,14 @@ public class blockManager : MonoBehaviour {
 		}
 		Debug.Log ("Total Notes: " + totalNotes);
 	}
-		
+
+	public void resetForNextGame() {
+		//The static variables persist through scenes, whereas the GameObjects are destroyed when scenes switch
+		ScoreController.score = 0;
+		ScoreController.total = 0;
+	}
+
+	public void startGame() {
+		startTime = Time.time;
+	}
 }
